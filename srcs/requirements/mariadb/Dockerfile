@@ -2,7 +2,7 @@ FROM alpine:3.17
 
 RUN apk add --no-cache mariadb mariadb-client
 
-RUN  mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+# RUN  mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
 COPY ./tools/entrypoint.sh /tmp/
 

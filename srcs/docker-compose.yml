@@ -11,4 +11,15 @@ services:
         - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
         - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
         - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
-
+        - WORDPRESS_STANDARD_USER_PASSWORD=${WORDPRESS_STANDARD_USER_PASSWORD}
+        - WORDPRESS_STANDARD_USER=${WORDPRESS_STANDARD_USER}
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+      volumes:
+        - ${VOLUMES_ROOT_PATH}/mariadb:/var/lib/mysql
+  
+      ports:
+        - 3306
