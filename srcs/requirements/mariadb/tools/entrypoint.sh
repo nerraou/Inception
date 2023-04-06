@@ -5,7 +5,7 @@ mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 mariadbd --user=mysql --bootstrap << EOF
 FLUSH PRIVILEGES;
 
-DROP USER ''@'localhost';
+-- DROP USER ''@'localhost';
 
 CREATE OR REPLACE DATABASE ${WORDPRESS_DB_NAME};
 
