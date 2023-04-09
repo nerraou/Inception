@@ -38,4 +38,6 @@ COPY ./tools/script.sh /tmp/
 
 WORKDIR /var/www
 
+COPY ./conf/php-fpm.conf /etc/php7/php-fpm.d/www.conf
+
 ENTRYPOINT ["sh","/tmp/script.sh"]
