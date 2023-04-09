@@ -1,0 +1,6 @@
+[mariadb]
+bind-address=wordpress
+
+[mysqld]
+skip-networking=0
+skip-bind-address

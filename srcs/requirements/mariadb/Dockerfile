@@ -6,6 +6,8 @@ RUN apk add --no-cache mariadb mariadb-client
 
 COPY ./tools/entrypoint.sh /tmp/
 
+COPY ./conf/conf.cnf /etc/my.cnf
+
 EXPOSE 3306
 
 ENTRYPOINT ["/tmp/entrypoint.sh"]

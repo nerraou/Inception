@@ -4,18 +4,21 @@ services:
   nginx:
       build: ./requirements/nginx
       container_name: nginx
+      volumes:
+        - ../www:/var/www
       ports:
-       - 443:443
-       - 80:80
+        - 443:443
+        - 80:80
+      networks:
+        - internal
+
   mariadb:
       build: ./requirements/mariadb
       container_name: mariadb
       environment:
-        - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-        - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
-        - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
-        - WORDPRESS_STANDARD_USER_PASSWORD=${WORDPRESS_STANDARD_USER_PASSWORD}
-        - WORDPRESS_STANDARD_USER=${WORDPRESS_STANDARD_USER}
+        - WP_DB_NAME=${WP_DB_NAME}
+        - WP_ADMIN=${WP_ADMIN}
+        - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
       deploy:
         restart_policy:
           condition: on-failure
@@ -25,10 +28,30 @@ services:
         - ${VOLUMES_ROOT_PATH}/mariadb:/var/lib/mysql
       ports:
         - 3306:3306
+      networks:
+        - internal
+
   wordpress:
       build: ./requirements/wordpress
       container_name: wordpress
+      environment:
+        - WP_DB_NAME=${WP_DB_NAME}
+        - WP_ADMIN=${WP_ADMIN}
+        - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
+        - WP_USER_PASSWORD=${WP_USER_PASSWORD}
+        - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+        - WP_TITLE=${WP_TITLE}
+        - WP_USER_EMAIL=${WP_USER_EMAIL}
+        - WP_USER=${WP_USER}
+        - WP_URL=${WP_URL}
+        - WP_MARIADB_HOSTNAME=${WP_MARIADB_HOSTNAME}
+      volumes:
+        - ../www:/var/www
       ports:
         - 9000:9000
+      networks:
+        - internal
 
-        
+networks:
+  internal:
+    driver: bridge
