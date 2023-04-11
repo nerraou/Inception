@@ -8,7 +8,6 @@ services:
         - ../www:/var/www
       ports:
         - 443:443
-        - 80:80
       networks:
         - internal
 
