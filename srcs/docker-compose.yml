@@ -4,6 +4,11 @@ services:
   nginx:
       build: ./requirements/nginx
       container_name: nginx
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
       volumes:
         - ../www:/var/www
       ports:
@@ -44,12 +49,30 @@ services:
         - WP_USER=${WP_USER}
         - WP_URL=${WP_URL}
         - WP_MARIADB_HOSTNAME=${WP_MARIADB_HOSTNAME}
+        - WP_REDIS_PORT=${WP_REDIS_PORT}
+        - WP_REDIS_HOST=${WP_REDIS_HOST}
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
       volumes:
         - ../www:/var/www
       ports:
         - 9000:9000
       networks:
         - internal
+
+  redis:
+    build: ./requirements/bonus/redis
+    container_name: redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - internal
 
 networks:
   internal:

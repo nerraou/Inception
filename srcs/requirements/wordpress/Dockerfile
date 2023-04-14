@@ -27,7 +27,8 @@ RUN apk add \
     php7-ldap \
     php7-ctype \
     php7-dom \
-    php7-simplexml
+    php7-simplexml \
+	php7-tokenizer
 
 
 RUN curl -O "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar" && \

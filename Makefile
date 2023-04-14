@@ -10,7 +10,7 @@ build: $(DOCKER_COMPOSE_PATH)
 start: $(DOCKER_COMPOSE_PATH)
 	docker compose -f $^ start
 
-re-build:
+re-build: $(DOCKER_COMPOSE_PATH)
 	docker compose -f $^ up -d --build
 
 stop: $(DOCKER_COMPOSE_PATH)
