@@ -73,6 +73,24 @@ services:
         max_attempts: 3
     networks:
       - internal
+  
+  ftp:
+    build: ./requirements/bonus/ftp
+    container_name: ftp
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    ports:
+      - 21:21
+    volumes:
+        - ../www:/var/www
+    environment:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASSWORD=${FTP_PASSWORD}
+    networks:
+      - internal
 
 networks:
   internal:
