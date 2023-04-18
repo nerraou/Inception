@@ -11,6 +11,7 @@ services:
           max_attempts: 3
       volumes:
         - ../www:/var/www
+        - ./requirements/nginx/web:/var/web
       ports:
         - 443:443
       networks:
@@ -91,6 +92,25 @@ services:
       - FTP_PASSWORD=${FTP_PASSWORD}
     networks:
       - internal
+  
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - internal
+
+  portfolio:
+    build: ./requirements/bonus/portfolio
+    volumes:
+      - ../../dunny:/var/www/dunny
+    networks:
+      - internal
+    
 
 networks:
   internal:
