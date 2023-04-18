@@ -104,13 +104,25 @@ services:
     networks:
       - internal
 
+  redis-ui:
+    build: ./requirements/bonus/redis-ui
+    container_name: redis-ui
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    ports:
+      - 8081:8081
+    networks:
+      - internal
+
   portfolio:
     build: ./requirements/bonus/portfolio
     volumes:
       - ../../dunny:/var/www/dunny
     networks:
       - internal
-    
 
 networks:
   internal:
