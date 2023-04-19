@@ -7,6 +7,6 @@ COPY ./tools/not-ca.crt /etc/ssl/certs
 COPY ./tools/not-ca.key /etc/ssl/certs
 
 
-COPY ./conf/wordpress.conf /etc/nginx/http.d/default.conf
+COPY ./conf/nginx-config.conf /etc/nginx/http.d/default.conf
 
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

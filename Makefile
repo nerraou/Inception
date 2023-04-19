@@ -13,5 +13,16 @@ start: $(DOCKER_COMPOSE_PATH)
 re-build: $(DOCKER_COMPOSE_PATH)
 	docker compose -f $^ up -d --build
 
+logs: $(DOCKER_COMPOSE_PATH)
+	docker compose -f $^ logs --follow
+
 stop: $(DOCKER_COMPOSE_PATH)
 	docker compose -f $^ stop
+
+clean: $(DOCKER_COMPOSE_PATH)
+	docker compose -f $^ down
+
+fclean: clean
+	sudo rm -rf /home/nerraou/data
+
+re: fclean run
