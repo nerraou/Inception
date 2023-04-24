@@ -1,2 +1,2 @@
 protected-mode no
-port REDIS_PORT
+port 6379

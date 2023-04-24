@@ -10,6 +10,9 @@ services:
           condition: on-failure
           delay: 5s
           max_attempts: 3
+      depends_on:
+        - wordpress
+        - adminer
       volumes:
         - ${VOLUMES_ROOT_PATH}/wordpress:/var/www
         - ${VOLUMES_ROOT_PATH}/portfolio:/var/portfolio
@@ -60,6 +63,8 @@ services:
           condition: on-failure
           delay: 5s
           max_attempts: 3
+      depends_on:
+        - mariadb
       volumes:
         - ${VOLUMES_ROOT_PATH}/wordpress:/var/www
 
@@ -110,6 +115,8 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
+    depends_on:
+      - mariadb
     networks:
       - internal
 
@@ -122,8 +129,13 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
+    depends_on:
+      - redis
     ports:
       - 8081:8081
+    environment:
+        - REDIS_HOST=${WP_REDIS_HOST}
+        - REDIS_PORT=${WP_REDIS_PORT}
     networks:
       - internal
 

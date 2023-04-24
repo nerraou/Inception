@@ -4,4 +4,6 @@ RUN apk add npm
 
 RUN npm i -g redis-commander
 
-CMD ["redis-commander", "--redis-port=6379", "--redis-host=redis"] 
+COPY ./tools/entrypoint.sh /tmp
+
+ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]

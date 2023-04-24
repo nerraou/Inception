@@ -35,7 +35,7 @@ RUN curl -O "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cl
     chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp
 
-COPY ./tools/script.sh /tmp/
+COPY ./tools/entrypoint.sh /tmp/
 
 COPY ./conf/php-fpm.conf /etc/php7/php-fpm.d/www.conf
 
