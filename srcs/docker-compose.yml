@@ -29,6 +29,7 @@ services:
         - WP_DB_NAME=${WP_DB_NAME}
         - WP_ADMIN=${WP_ADMIN}
         - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
+        - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       deploy:
         restart_policy:
           condition: on-failure
