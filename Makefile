@@ -25,4 +25,4 @@ clean: $(DOCKER_COMPOSE_PATH)
 fclean: clean
 	sudo rm -rf /home/nerraou/data
 
-re: fclean run
+re: fclean build run

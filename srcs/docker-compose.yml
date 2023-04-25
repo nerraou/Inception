@@ -15,7 +15,7 @@ services:
         - adminer
       volumes:
         - ${VOLUMES_ROOT_PATH}/wordpress:/var/www
-        - ${VOLUMES_ROOT_PATH}/portfolio:/var/portfolio
+        - ./requirements/bonus/portfolio/:/var/portfolio
       ports:
         - 443:443
       networks:
@@ -137,15 +137,6 @@ services:
     environment:
         - REDIS_HOST=${WP_REDIS_HOST}
         - REDIS_PORT=${WP_REDIS_PORT}
-    networks:
-      - internal
-
-  portfolio:
-    image: portfolio
-    build: ./requirements/bonus/portfolio
-    container_name: portfolio
-    volumes:
-      - ${VOLUMES_ROOT_PATH}/portfolio:/var/portfolio
     networks:
       - internal
 
