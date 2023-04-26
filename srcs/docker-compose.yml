@@ -37,8 +37,6 @@ services:
           max_attempts: 3
       volumes:
         - ${VOLUMES_ROOT_PATH}/mariadb:/var/lib/mysql
-      ports:
-        - 3306:3306
       networks:
         - internal
 
@@ -68,9 +66,6 @@ services:
         - mariadb
       volumes:
         - ${VOLUMES_ROOT_PATH}/wordpress:/var/www
-
-      ports:
-        - 9000:9000
       networks:
         - internal
 
@@ -132,8 +127,6 @@ services:
         max_attempts: 3
     depends_on:
       - redis
-    ports:
-      - 8081:8081
     environment:
         - REDIS_HOST=${WP_REDIS_HOST}
         - REDIS_PORT=${WP_REDIS_PORT}
